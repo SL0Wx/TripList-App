@@ -10,12 +10,14 @@ function App() {
 
   return (
     <div className="App">
-      <h1>Twoja lista wyjazdów</h1>
-      <List tripList={tripList} setTripList={setTripList} />
-      <Button variant="primary" onClick={() => setAddNew(true)}>Dodaj nowe</Button>
-      {addNew === true && (
-        <NewTrip setAddNew={setAddNew} />
-      )}
+      <div className="container">
+        <h1>Twoja lista wyjazdów</h1>
+        <List tripList={tripList} setTripList={setTripList} />
+        <Button variant="success" className="addBtn" onClick={() => setAddNew(true)}>Dodaj nowe</Button>
+        {addNew === true && (
+          <NewTrip setAddNew={setAddNew} tripList={tripList} setTripList={setTripList} />
+        )}
+      </div>
     </div>
   );
 }

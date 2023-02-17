@@ -5,12 +5,36 @@
     left: 37.5%;
     top: 25%;
     padding: 2rem;
-    border: 2px solid black;
     border-radius: 10px;
+    background-color: #40444b;
+    color: white;
 }
 
 .closeBtn {
     position: absolute;
-    left: 95%;
+    right: 0;
     top: 0;
+}
+
+.tripList {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.tripBox {
+    display: inline-flex;
+    width: 33%;
+    height: 150px;
+    background-color: #2f3136;
+    border-radius: 5px;
+    margin: 2px auto;
+}
+
+.tripBoxContent {
+    width: 100%;
+}
+
+.tripAcordation {
+    width: 35vw;
 }
