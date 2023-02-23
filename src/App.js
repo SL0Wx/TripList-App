@@ -10,6 +10,7 @@ function App() {
 
   return (
     <div className="App">
+      <div className="overlay" style={{ display: addNew ? "block" : "none" }}></div>
       <div className="container">
         <h1>Twoja lista wyjazdów</h1>
         <List tripList={tripList} setTripList={setTripList} />

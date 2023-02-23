@@ -8,12 +8,15 @@
     border-radius: 10px;
     background-color: #40444b;
     color: white;
+    border: 3px solid black;
+    z-index: 10;
 }
 
 .closeBtn {
     position: absolute;
     right: 0;
     top: 0;
+    z-index: 10;
 }
 
 .tripList {
