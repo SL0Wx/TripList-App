@@ -6,7 +6,7 @@ import CloseButton from 'react-bootstrap/CloseButton';
 import { useState } from 'react';
 import "./style.css";
 
-function NewTrip({ setAddNew, tripList, setTripList }) {
+function NewTrip({ setAddNew, tripList, setTripList, id, setId }) {
     const [place, setPlace] = useState("");
     const [startDate, setStartDate] = useState("");
     const [endDate, setEndDate] = useState("");
@@ -16,17 +16,19 @@ function NewTrip({ setAddNew, tripList, setTripList }) {
     
     const delay = ms => new Promise(
         resolve => setTimeout(resolve, ms)
-      );
+    );
 
     function handleAddTrip(e) {
         e.preventDefault();
         let newTrip = {
+            id,
             place,
             startDate,
             endDate,
             peopleArray,
         }
         setTripList([...tripList, newTrip])
+        setId(id + 1)
         setAddNew(false);
     }
 
@@ -34,45 +36,46 @@ function NewTrip({ setAddNew, tripList, setTripList }) {
         e.preventDefault();
         setToggle(true);
         setPeopleArray([...peopleArray, person]);
-        await delay(1000);
-        document.getElementById("person").value = ""
+        await delay(500);
+        document.getElementById("person").value = "";
         setToggle(false);
     }
   
     return (
-    <div className="newTripForm">
-        <CloseButton className="closeBtn" onClick={() => setAddNew(false)} />
-        <Form>
-            <Form.Group className="mb-3" controlId="formBasicPlace">
-                <Form.Label>Miejsce</Form.Label>
-                <Form.Control type="text" placeholder="Nazwa miejsca" name="place" onChange={e => setPlace(e.target.value)} />
-            </Form.Group>
-            <Form.Group className="mb-3" controlId="formBasicStartDate">
-                <Form.Label>Data rozpoczęcia</Form.Label>
-                <Form.Control type="date" name="startDate" onChange={e => setStartDate(e.target.value)} />
-            </Form.Group>
-            <Form.Group className="mb-3" controlId="formBasicEndDate">
-                <Form.Label>Data zakończenia</Form.Label>
-                <Form.Control type="date" name="endDate" onChange={e => setEndDate(e.target.value)} />
-            </Form.Group>
-            <Row>
-                <Col xs={8}>
-                    <Form.Group controlId="formBasicPerson" className="mb-3">
-                        <Form.Control id="person" type="text" placeholder="Imię i nazwisko uczestnika" name="person" onChange={e => setPerson(e.target.value)} />
-                    </Form.Group>
-                </Col>
-                <Col>
-                    <Form.Group controlId="formBasicAddPersonBtn" className="mb-3">
-                        <Button variant="success" disabled={toggle} onClick={handleAddPerson}>{toggle ? "Dodano!" : "Dodaj osobę"}</Button>
-                    </Form.Group>
-                </Col>
-            </Row>
-            <Button variant="success" type="submit" onClick={handleAddTrip}>
-                Dodaj
-            </Button>
-        </Form>
-    </div>
-  )
+        <div className="newTripForm">
+            <CloseButton className="closeBtn" onClick={() => setAddNew(false)} />
+            <Form>
+                <Form.Group className="mb-3" controlId="formBasicPlace">
+                    <Form.Label>Miejsce</Form.Label>
+                    <Form.Control type="text" placeholder="Nazwa miejsca" name="place" onChange={e => setPlace(e.target.value)} />
+                </Form.Group>
+                <Form.Group className="mb-3" controlId="formBasicStartDate">
+                    <Form.Label>Data rozpoczęcia</Form.Label>
+                    <Form.Control type="date" name="startDate" onChange={e => setStartDate(e.target.value)} />
+                </Form.Group>
+                <Form.Group className="mb-3" controlId="formBasicEndDate">
+                    <Form.Label>Data zakończenia</Form.Label>
+                    <Form.Control type="date" name="endDate" onChange={e => setEndDate(e.target.value)} />
+                </Form.Group>
+                <Row>
+                    <Form.Label>Uczestnicy</Form.Label>
+                    <Col xs={8}>
+                        <Form.Group className="mb-3">
+                            <Form.Control id="person" type="text" placeholder="Imię i nazwisko uczestnika" name="person" onChange={e => setPerson(e.target.value)} />
+                        </Form.Group>
+                    </Col>
+                    <Col>
+                        <Form.Group controlId="formBasicAddPersonBtn" className="mb-3">
+                            <Button variant="success" disabled={toggle} onClick={handleAddPerson}>{toggle ? "Dodano!" : "Dodaj"}</Button>
+                        </Form.Group>
+                    </Col>
+                </Row>
+                <Button variant="success" type="submit" onClick={handleAddTrip}>
+                    Stwórz
+                </Button>
+            </Form>
+        </div>
+   )
 }
 
 export default NewTrip

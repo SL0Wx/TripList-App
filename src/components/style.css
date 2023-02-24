@@ -1,8 +1,7 @@
-.newTripForm {
+.newTripForm, .editTripForm, .peopleListBox {
     width: 25%;
     margin: 0 auto;
     position: absolute;
-    left: 37.5%;
     top: 25%;
     padding: 2rem;
     border-radius: 10px;
@@ -10,6 +9,14 @@
     color: white;
     border: 3px solid black;
     z-index: 10;
+}
+
+.newTripForm {
+    left: 37.5%;
+}
+
+.peopleListBox {
+    left: 50%;
 }
 
 .closeBtn {
@@ -39,5 +46,23 @@
 }
 
 .tripAcordation {
-    width: 35vw;
+    width: 50%;
+}
+
+.peopleList {
+    opacity: 1;
+}
+
+.peopleListBtn {
+    display: flex;
+    justify-content: flex-start;
+}
+
+.manageButtons {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.editBtn, .deleteBtn {
+    margin: 10px;
 }
