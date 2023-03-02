@@ -4,8 +4,9 @@ import Accordion from 'react-bootstrap/Accordion';
 import ListGroup from 'react-bootstrap/ListGroup';
 import { useState } from 'react';
 import EditTrip from './EditTrip';
+import ItemList from './ItemList';
 
-function List({ tripList, setTripList, edit, setEdit }) {
+function List({ tripList, setTripList, edit, setEdit, id, setId, itemsToggle, setItemsToggle }) {
   return (
     <div>
         {tripList.length > 0 ? (
@@ -21,9 +22,12 @@ function List({ tripList, setTripList, edit, setEdit }) {
                         <p>Lista osób:</p>
                         <ListGroup as="ol" numbered className="peopleList">
                           {trip.peopleArray.map((person, i) => (
-                            <ListGroup.Item as="li" key={i}>{person}</ListGroup.Item>
+                            <ListGroup.Item as="li" key={i}>{person.name}</ListGroup.Item>
                           ))}
                         </ListGroup>
+                        <div className="itemsBtn">
+                          <Button variant="secondary" onClick={() => setItemsToggle(true)}>Lista rzeczy</Button>
+                        </div>
                         <div className="manageButtons">
                           <Button variant="success" className="editBtn" onClick={() => setEdit(true)}>Edytuj</Button>
                           <Button variant="danger" className="deleteBtn" onClick={() => {setTripList((tripList) => tripList.filter((t) => t.id !== trip.id))}}>Usuń</Button>
@@ -31,7 +35,10 @@ function List({ tripList, setTripList, edit, setEdit }) {
                       </Accordion.Body>
                     </Accordion.Item>
                     {edit === true && (
-                      <EditTrip tripList={tripList} setTripList={setTripList} trip={trip} setEdit={setEdit} />
+                      <EditTrip tripList={tripList} setTripList={setTripList} trip={trip} setEdit={setEdit} id={id} setId={setId} />
+                    )}
+                    {itemsToggle === true && (
+                      <ItemList trip={trip} setItemsToggle={setItemsToggle} />
                     )}
                   </>
                 ))}

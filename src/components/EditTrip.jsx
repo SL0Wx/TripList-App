@@ -7,11 +7,11 @@ import ListGroup from 'react-bootstrap/ListGroup';
 import { useState } from 'react';
 import "./style.css";
 
-function EditTrip({ tripList, setTripList, trip, setEdit }) {
+function EditTrip({ tripList, setTripList, trip, setEdit, id, setId }) {
     const [place, setPlace] = useState(trip.place);
     const [startDate, setStartDate] = useState(trip.startDate);
     const [endDate, setEndDate] = useState(trip.endDate);
-    const [person, setPerson] = useState("");
+    const [personName, setPersonName] = useState("");
     const [peopleArray, setPeopleArray] = useState(trip.peopleArray);
     const [toggle, setToggle] = useState(false);
     const [peopleListToggle, setPeopleListToggle] = useState(false);
@@ -35,9 +35,16 @@ function EditTrip({ tripList, setTripList, trip, setEdit }) {
     async function handleAddPerson(e) {
         e.preventDefault();
         setToggle(true);
-        setPeopleArray([...peopleArray, person]);
+        let newPerson = {
+            id,
+            name: personName,
+            item: "",
+        };
+        setPeopleArray([...peopleArray, newPerson]);
         await delay(500);
         document.getElementById("person").value = "";
+        setPersonName("");
+        setId(id + 1);
         setToggle(false);
     }
 
@@ -62,7 +69,7 @@ function EditTrip({ tripList, setTripList, trip, setEdit }) {
                         <Form.Label>Uczestnicy</Form.Label>
                         <Col xs={8}>
                             <Form.Group className="mb-3">
-                                <Form.Control id="person" type="text" placeholder="Imię i nazwisko uczestnika" name="person" onChange={e => setPerson(e.target.value)} />
+                                <Form.Control id="person" type="text" placeholder="Imię i nazwisko uczestnika" name="person" onChange={e => setPersonName(e.target.value)} />
                             </Form.Group>
                         </Col>
                         <Col>
@@ -85,13 +92,22 @@ function EditTrip({ tripList, setTripList, trip, setEdit }) {
                     <div className="peopleListBox">
                         <CloseButton className="closeBtn" onClick={() => setPeopleListToggle(false)} />
                         <ListGroup className="peopleList">
-                          {peopleArray.map((person, i) => (
-                            <>
-                                <ListGroup.Item as="li" key={i}>{person}</ListGroup.Item>
-                                <Button variant="outline-danger">Usuń</Button>
-                            </>
-                          ))}
+                        {peopleArray.length > 0 ? (
+                            peopleArray.map((person, i) => (
+                                <>
+                                    <ListGroup.Item as="li" key={i}>
+                                        <div className="peopleListItem">
+                                            {person.name}
+                                            <Button variant="danger" onClick={() => {setPeopleArray((peopleArray) => peopleArray.filter((p) => p.id !== person.id))}}>Usuń</Button>
+                                        </div>
+                                    </ListGroup.Item>
+                                </>
+                            ))
+                        ) : (
+                            <p>Brak uczestników</p>
+                        )}
                         </ListGroup>
+                        <Button variant="success" className="saveBtn" onClick={() => setPeopleListToggle(false)}>Zapisz</Button>
                     </div>
             )}
         </>

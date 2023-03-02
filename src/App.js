@@ -9,13 +9,15 @@ function App() {
   const [addNew, setAddNew] = useState(false);
   const [edit, setEdit] = useState(false);
   const [id, setId] = useState(0);
+  const [itemsToggle, setItemsToggle] = useState(false);
+
 
   return (
     <div className="App">
-      <div className="overlay" style={{ display: (addNew || edit) ? "block" : "none" }}></div>
+      <div className="overlay" style={{ display: (addNew || edit || itemsToggle) ? "block" : "none" }}></div>
       <div className="container">
         <h1>Twoja lista wyjazdów</h1>
-        <List tripList={tripList} setTripList={setTripList} edit={edit} setEdit={setEdit} />
+        <List tripList={tripList} setTripList={setTripList} edit={edit} setEdit={setEdit} itemList id={id} setId={setId} itemsToggle={itemsToggle} setItemsToggle={setItemsToggle} />
         <Button variant="success" className="addBtn" onClick={() => setAddNew(true)}>Utwórz nowy wyjazd</Button>
         {addNew === true && (
           <NewTrip setAddNew={setAddNew} tripList={tripList} setTripList={setTripList} id={id} setId={setId} />

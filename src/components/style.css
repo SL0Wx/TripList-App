@@ -1,4 +1,4 @@
-.newTripForm, .editTripForm, .peopleListBox {
+.newTripForm, .editTripForm, .peopleListBox, .itemListForm, .itemListBox {
     width: 25%;
     margin: 0 auto;
     position: absolute;
@@ -15,7 +15,7 @@
     left: 37.5%;
 }
 
-.peopleListBox {
+.peopleListBox, .itemListForm {
     left: 50%;
 }
 
@@ -49,20 +49,32 @@
     width: 50%;
 }
 
-.peopleList {
-    opacity: 1;
-}
-
 .peopleListBtn {
     display: flex;
     justify-content: flex-start;
 }
 
 .manageButtons {
-    display: flex;
+    display: inline-flex;
     justify-content: flex-end;
+    width: 50%;
+}
+
+.itemsBtn {
+    display: inline-flex;
+    width: 50%;
 }
 
 .editBtn, .deleteBtn {
     margin: 10px;
+}
+
+.peopleListItem {
+    display: flex;
+    justify-content: space-between;
+    line-height: 40px;
+}
+
+.saveBtn, .saveItems {
+    margin-top: 20px;
 }
