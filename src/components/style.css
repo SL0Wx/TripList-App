@@ -52,6 +52,7 @@
 .peopleListBtn {
     display: flex;
     justify-content: flex-start;
+    margin-bottom: 10px;
 }
 
 .manageButtons {
@@ -65,11 +66,11 @@
     width: 50%;
 }
 
-.editBtn, .deleteBtn {
+.editBtn, .deleteBtn, .addItemBtn {
     margin: 10px;
 }
 
-.peopleListItem {
+.peopleListItem, .itemListItem {
     display: flex;
     justify-content: space-between;
     line-height: 40px;
@@ -77,4 +78,10 @@
 
 .saveBtn, .saveItems {
     margin-top: 20px;
+}
+
+.errorValidation {
+    display: flex;
+    justify-content: center;
+    color: rgb(255, 55, 55);
 }

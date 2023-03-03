@@ -15,37 +15,48 @@ function EditTrip({ tripList, setTripList, trip, setEdit, id, setId }) {
     const [peopleArray, setPeopleArray] = useState(trip.peopleArray);
     const [toggle, setToggle] = useState(false);
     const [peopleListToggle, setPeopleListToggle] = useState(false);
+    const [errorMsg, setErrorMsg] = useState("");
+    const [addPersonMsg, setAddPersonMsg] = useState("");
   
     const delay = ms => new Promise(
         resolve => setTimeout(resolve, ms)
     );
 
     function handleEditTrip(e) {
-        e.preventDefault();
-        let trips = tripList;
-        trip.place = place;
-        trip.startDate = startDate;
-        trip.endDate = endDate;
-        trip.peopleArray = peopleArray;
-        trips[trips.findIndex((t) => t === trip.id)] = trip;
-        setTripList(trips);
-        setEdit(false);
+        if (place === "" || startDate === "" || endDate === "") {
+            setErrorMsg("Wypełnij wszystkie pola!");
+        } else {
+            e.preventDefault();
+            let trips = tripList;
+            trip.place = place;
+            trip.startDate = startDate;
+            trip.endDate = endDate;
+            trip.peopleArray = peopleArray;
+            trips[trips.findIndex((t) => t === trip.id)] = trip;
+            setTripList(trips);
+            setEdit(false);   
+        }
     }
 
     async function handleAddPerson(e) {
-        e.preventDefault();
-        setToggle(true);
-        let newPerson = {
-            id,
-            name: personName,
-            item: "",
-        };
-        setPeopleArray([...peopleArray, newPerson]);
-        await delay(500);
-        document.getElementById("person").value = "";
-        setPersonName("");
-        setId(id + 1);
-        setToggle(false);
+        if (personName === "") {
+            setAddPersonMsg("Wypełnij to pole!");
+        } else {
+            e.preventDefault();
+            setToggle(true);
+            setAddPersonMsg("");
+            let newPerson = {
+                id,
+                name: personName,
+                item: "",
+            };
+            setPeopleArray([...peopleArray, newPerson]);
+            await delay(500);
+            document.getElementById("person").value = "";
+            setPersonName("");
+            setId(id + 1);
+            setToggle(false);
+        }
     }
 
     return (
@@ -78,14 +89,16 @@ function EditTrip({ tripList, setTripList, trip, setEdit, id, setId }) {
                             </Form.Group>
                         </Col>
                     </Row>
+                    <span class="errorValidation">{addPersonMsg}</span>
                     <Row>
                         <Form.Group controlId="formBasicShowPeopleBtn" className="peopleListBtn">
                             <Button variant="outline-info" size="sm" onClick={() => setPeopleListToggle(true)}>Lista uczestników</Button>
                         </Form.Group>
                     </Row>
-                    <Button variant="success" type="submit" onClick={handleEditTrip}>
+                    <Button variant="success" onClick={handleEditTrip}>
                         Edytuj
                     </Button>
+                    <span class="errorValidation">{errorMsg}</span>
                 </Form>
             </div>
             {peopleListToggle && (
