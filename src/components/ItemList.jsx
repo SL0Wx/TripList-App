@@ -81,7 +81,7 @@ function ItemList({ tripList, setTripList, trip, setItemsToggle, id, setId }) {
                     <Form.Group className="mb-3">
                         <Form.Control id="item" type="text" placeholder="Nazwa rzeczy" name="item" onChange={e => setItem(e.target.value)} />
                     </Form.Group>
-                    <span class="errorValidation">{errorMsg}</span>
+                    <span className="errorValidation">{errorMsg}</span>
                     <Form.Label>Przypisana osoba</Form.Label>
                     <Form.Group className="mb-3">
                         <Form.Select value={personId} onChange={e => setPersonId(parseInt(e.target.value))}>

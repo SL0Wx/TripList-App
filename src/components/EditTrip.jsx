@@ -89,7 +89,7 @@ function EditTrip({ tripList, setTripList, trip, setEdit, id, setId }) {
                             </Form.Group>
                         </Col>
                     </Row>
-                    <span class="errorValidation">{addPersonMsg}</span>
+                    <span className="errorValidation">{addPersonMsg}</span>
                     <Row>
                         <Form.Group controlId="formBasicShowPeopleBtn" className="peopleListBtn">
                             <Button variant="outline-info" size="sm" onClick={() => setPeopleListToggle(true)}>Lista uczestników</Button>
@@ -98,7 +98,7 @@ function EditTrip({ tripList, setTripList, trip, setEdit, id, setId }) {
                     <Button variant="success" onClick={handleEditTrip}>
                         Edytuj
                     </Button>
-                    <span class="errorValidation">{errorMsg}</span>
+                    <span className="errorValidation">{errorMsg}</span>
                 </Form>
             </div>
             {peopleListToggle && (
